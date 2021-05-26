@@ -5,55 +5,55 @@
 #ifndef WINSERVERLOGIN_H
 #define WINSERVERLOGIN_H
 
-#include <QObject>
+	#include <QObject>
 
-#include <QWidget>
+	#include <QWidget>
 
-#include <QBoxLayout>
-#include <QLineEdit>
-#include <QPushButton>
+	#include <QBoxLayout>
+	#include <QLineEdit>
+	#include <QPushButton>
 
-#include <QMessageBox>
+	#include <QMessageBox>
 
-#include <QtSql/QSql>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
+	#include <QtSql/QSql>
+	#include <QtSql/QSqlDatabase>
+	#include <QtSql/QSqlQuery>
 
-#include "WinLogin.h"
-#include "WinRecMsg.h"
+	#include "WinLogin.h"
+	#include "WinRecMsg.h"
 
-class WinServerLogin : public QWidget
-{
-	Q_OBJECT
+	class WinServerLogin : public QWidget
+	{
+		Q_OBJECT
 
-	public:
-		WinServerLogin();
-		~WinServerLogin();
+			public:
+			WinServerLogin();
+			~WinServerLogin();
 
-	private slots:
-		void clickButConnect();
-		void clickButDisconnect();
-		void clickButContinue();
-		void clickButServerLogin();
+		private slots:
+			void clickButConnect();
+			void clickButDisconnect();
+			void clickButContinue();
+			void clickButServerLogin();
 
-	private:
-		QBoxLayout *layout;
+		private:
+			QBoxLayout *layout;
 
-		QLineEdit *linehostserver;
-		QLineEdit *lineloginserver;
-		QLineEdit *linepasswordserver;
+			QLineEdit *linehostserver;
+			QLineEdit *lineloginserver;
+			QLineEdit *linepasswordserver;
 
-		QPushButton *butconnect;
-		QPushButton *butdisconnect;
-		QPushButton *butcontinue;
-		QPushButton *butloginserver;
+			QPushButton *butconnect;
+			QPushButton *butdisconnect;
+			QPushButton *butcontinue;
+			QPushButton *butloginserver;
 
-		QSqlDatabase *db;
+			QSqlDatabase *db;
 
-		QSqlQuery *query;
+			QSqlQuery *query;
 
-		WinLogin *winLogin;
-		WinRecMsg *winRecMsg;
-};
+			WinLogin *winLogin;
+			WinRecMsg *winRecMsg;
+	};
 
 #endif

@@ -5,56 +5,56 @@
 #ifndef WINLOGIN_H
 #define WINLOGIN_H
 
-#include <QObject>
+	#include <QObject>
 
-#include <QBoxLayout>
+	#include <QBoxLayout>
 
-#include <QWidget>
-#include <QLineEdit>
-#include <QPushButton>
+	#include <QWidget>
+	#include <QLineEdit>
+	#include <QPushButton>
 
-#include <QMessageBox>
+	#include <QMessageBox>
 
-#include <QtSql/QSql>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
+	#include <QtSql/QSql>
+	#include <QtSql/QSqlDatabase>
+	#include <QtSql/QSqlQuery>
 
-#include <QCryptographicHash>
+	#include <QCryptographicHash>
 
-#include "WinReg.h"
-#include "WinMsg.h"
+	#include "WinReg.h"
+	#include "WinMsg.h"
 
-class WinLogin : public QWidget
-{
-	Q_OBJECT
+	class WinLogin : public QWidget
+	{
+		Q_OBJECT
 
-	public:
-		explicit WinLogin(QSqlDatabase*, QSqlQuery*, QWidget*);
-		~WinLogin();
+		public:
+			explicit WinLogin(QSqlDatabase*, QSqlQuery*, QWidget*);
+			~WinLogin();
 
-	private slots:
-		void clickButLogin();
-		void clickButReg();
-		void clickButBack();
+		private slots:
+			void clickButLogin();
+			void clickButReg();
+			void clickButBack();
 
-	private:
-		QBoxLayout *layout;
+		private:
+			QBoxLayout *layout;
 
-		QLineEdit *linelogin;
-		QLineEdit *linepassword;
+			QLineEdit *linelogin;
+			QLineEdit *linepassword;
 
-		QPushButton *butlogin;
-		QPushButton *butreg;
-		QPushButton *butback;
+			QPushButton *butlogin;
+			QPushButton *butreg;
+			QPushButton *butback;
 
-		QSqlDatabase *db;
+			QSqlDatabase *db;
 
-		QSqlQuery *query;
+			QSqlQuery *query;
 
-		QWidget *winServerLogin;
+			QWidget *winServerLogin;
 
-		WinReg *winReg;
-		WinMsg *winMsg;
-};
+			WinReg *winReg;
+			WinMsg *winMsg;
+	};
 
 #endif

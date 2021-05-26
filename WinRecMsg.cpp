@@ -6,7 +6,7 @@
 WinRecMsg::WinRecMsg(QWidget *wl) : layout(new QBoxLayout(QBoxLayout::Down)), labelhost(new QLabel("Ваш адрес: ")), labelport(new QLabel("Ваш порт: ")),
 linemessages(new QTextEdit()), butexit(new QPushButton("Выход")), winLogin(wl),
 server(new QUdpSocket(this)), socket(new QUdpSocket(this)),
-list(new QList<QString>())
+list(new QList<QString>()), recfile(false)
 {
 	setWindowTitle("Сервер");
 	setFixedSize(500, 500);
@@ -15,7 +15,22 @@ list(new QList<QString>())
 	linemessages->setPlaceholderText("Сообщения");
 	linemessages->setReadOnly(true);
 
-	socket->bind(QHostAddress::Any, 5555);
+	if(!socket->bind(QHostAddress::Any, 5555))
+	{
+		QMessageBox::critical(this, "Ошибка", "Порт уже используется!");
+
+		if(server){ delete server; }
+
+		server = nullptr;
+
+		if(socket){ delete socket; }
+
+		socket = nullptr;
+
+		winLogin->show();
+
+		close();
+	}
 
 	labelhost->setText(labelhost->text() + server->localAddress().toString());
 	labelport->setText(labelport->text() + QString::number(5555));
@@ -31,17 +46,14 @@ WinRecMsg::~WinRecMsg()
 {
 	if(server)
 	{
-		server->close();
-
 		delete server;
-
 		server = nullptr;
+	}
+
 	}
 
 	if(socket)
 	{
-		socket->close();
-
 		delete socket;
 
 		socket = nullptr;
@@ -91,6 +103,16 @@ void WinRecMsg::ready()
 
 	msg =  QString(datagram.senderAddress().toString().split(':')[3]) + ":" + QString::number(datagram.senderPort()) + QString(datagram.data() + "\n");
 
+	if(msg.indexOf("%ENDFILE%") > -1)
+	{
+		recfile = false;
+	}
+
+	if(msg.indexOf("%ENDCHANNEL%") > -1)
+  {
+  	list->removeAt(list->indexOf(datagram.senderAddress().toString().split(':')[3]));
+  }
+
 	linemessages->setText(linemessages->toPlainText() + msg);
 
 	if(list->indexOf(datagram.senderAddress().toString().split(':')[3]) == -1)
@@ -102,6 +124,18 @@ void WinRecMsg::ready()
 
 	for(int counter = 0; counter < list->count(); ++counter)
 	{
-		server->writeDatagram(msg.toUtf8(), QHostAddress(list->value(counter)), 5554);
+  	if(!recfile)
+    {
+    	server->writeDatagram(msg.toUtf8(), QHostAddress(list->value(counter)), 5554);
+    }
+    else
+    {
+    	server->writeDatagram(datagram.data(), QHostAddress(list->value(counter)), 5554);
+    }
 	}
+
+  if(msg.indexOf("%FILE%:") > -1)
+  {
+  	recfile = true;
+  }
 }

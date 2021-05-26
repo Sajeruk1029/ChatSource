@@ -4,50 +4,54 @@
 #ifndef WINRECMSG_H
 #define WINRECMSG_H
 
-#include <QObject>
+	#include <QObject>
 
-#include <QWidget>
-#include <QBoxLayout>
-#include <QTextEdit>
-#include <QPushButton>
-#include <QLabel>
+	#include <QWidget>
+	#include <QBoxLayout>
+	#include <QTextEdit>
+	#include <QPushButton>
+	#include <QLabel>
 
-#include <QUdpSocket>
-#include <QNetworkDatagram>
-#include <QHostAddress>
+	#include <QUdpSocket>
+	#include <QNetworkDatagram>
+	#include <QHostAddress>
 
-#include <QList>
+	#include <QList>
 
-#include <QDebug>
+	#include <QDebug>
 
-class WinRecMsg : public QWidget
-{
-	Q_OBJECT
+	#include <QMessageBox>
 
-	public:
-		explicit WinRecMsg(QWidget*);
-		~WinRecMsg();
+	class WinRecMsg : public QWidget
+	{
+		Q_OBJECT
 
-	private slots:
-		void clickButExit();
-		void ready();
+			public:
+				explicit WinRecMsg(QWidget*);
+				~WinRecMsg();
 
-	private:
-		QBoxLayout *layout;
+			private slots:
+				void clickButExit();
+				void ready();
 
-		QLabel *labelhost;
-		QLabel *labelport;
+			private:
+				QBoxLayout *layout;
 
-		QTextEdit *linemessages;
+				QLabel *labelhost;
+				QLabel *labelport;
 
-		QPushButton *butexit;
+				QTextEdit *linemessages;
 
-		QWidget *winLogin;
+				QPushButton *butexit;
 
-		QUdpSocket *server;
-		QUdpSocket *socket;
+				QWidget *winLogin;
 
-		QList<QString> *list;
-};
+				QUdpSocket *server;
+				QUdpSocket *socket;
+
+				QList<QString> *list;
+
+        bool recfile;
+	};
 
 #endif

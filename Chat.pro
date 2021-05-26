@@ -10,6 +10,8 @@ INCLUDEPATH += .
 
 QT += core gui widgets sql network
 
+#CONFIG += exceptions
+
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -22,5 +24,7 @@ QT += core gui widgets sql network
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += WinLogin.h WinMsg.h WinServerLogin.h WinReg.h WinRecMsg.h
-SOURCES += main.cpp WinLogin.cpp WinMsg.cpp WinServerLogin.cpp WinReg.cpp WinRecMsg.cpp
+HEADERS += WinLogin.h WinMsg.h WinServerLogin.h WinReg.h WinRecMsg.h \
+    thread.h
+SOURCES += main.cpp WinLogin.cpp WinMsg.cpp WinServerLogin.cpp WinReg.cpp WinRecMsg.cpp \
+    thread.cpp

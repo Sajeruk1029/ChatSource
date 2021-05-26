@@ -5,48 +5,48 @@
 #ifndef WINREG_H
 #define WINREG_H
 
-#include <QObject>
+	#include <QObject>
 
-#include <QWidget>
-#include <QBoxLayout>
-#include <QLineEdit>
-#include <QPushButton>
+	#include <QWidget>
+	#include <QBoxLayout>
+	#include <QLineEdit>
+	#include <QPushButton>
 
-#include <QMessageBox>
+	#include <QMessageBox>
 
-#include <QtSql/QSql>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
-#include <QtSql/QSqlError>
+	#include <QtSql/QSql>
+	#include <QtSql/QSqlDatabase>
+	#include <QtSql/QSqlQuery>
+	#include <QtSql/QSqlError>
 
-#include <QCryptographicHash>
+	#include <QCryptographicHash>
 
-class WinReg : public QWidget
-{
-	Q_OBJECT
+	class WinReg : public QWidget
+	{
+		Q_OBJECT
 
-	public:
-		WinReg(QSqlDatabase*, QSqlQuery*, QWidget*);
-		~WinReg();
+			public:
+				WinReg(QSqlDatabase*, QSqlQuery*, QWidget*);
+				~WinReg();
 
-	private slots:
-		void clickButReg();
-		void clickButBack();
+			private slots:
+				void clickButReg();
+				void clickButBack();
 
-	private:
-		QBoxLayout *layout;
+			private:
+				QBoxLayout *layout;
 
-		QPushButton *butreg;
-		QPushButton *butback;
+				QPushButton *butreg;
+				QPushButton *butback;
 
-		QLineEdit *linelogin;
-		QLineEdit *linepassword;
+				QLineEdit *linelogin;
+				QLineEdit *linepassword;
 
-		QSqlDatabase *db;
+				QSqlDatabase *db;
 
-		QSqlQuery *query;
+				QSqlQuery *query;
 
-		QWidget *winLogin;
-};
+				QWidget *winLogin;
+	};
 
 #endif

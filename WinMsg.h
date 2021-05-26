@@ -5,61 +5,107 @@
 #ifndef WINMSG_H
 #define WINMSG_H
 
-#include <QObject>
+	#include <QObject>
 
-#include <QWidget>
-#include <QBoxLayout>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QLabel>
-#include <QTextEdit>
+	#include <QWidget>
+	#include <QBoxLayout>
+	#include <QPushButton>
+	#include <QLineEdit>
+	#include <QLabel>
+	#include <QTextEdit>
 
-#include <QMessageBox>
+	#include <QMessageBox>
 
-#include <QtSql/QSql>
-#include <QtSql/QSqlDatabase>
-#include <QtSql/QSqlQuery>
+	#include <QFileDialog>
 
-#include <QUdpSocket>
-#include <QHostAddress>
-#include <QNetworkDatagram>
+	#include <QtSql/QSql>
+	#include <QtSql/QSqlDatabase>
+	#include <QtSql/QSqlQuery>
 
-#include <QDebug>
+	#include <QUdpSocket>
+	#include <QHostAddress>
+	#include <QNetworkDatagram>
 
-class WinMsg : public QWidget
-{
-	Q_OBJECT
+	#include <QDebug>
 
-	public:
-		explicit WinMsg(QWidget*, QString);
-		~WinMsg();
+	#include <QFile>
 
-	private slots:
-		void clickButExit();
-		void clickButSend();
-		void recive();
+	#include <QByteArray>
 
-	private:
-		QBoxLayout *layout;
+	#include <QUrl>
 
-		QPushButton *butsend;
-		QPushButton *butexit;
+	#include <QTimer>
 
-		QLabel *labellogin;
-		QLabel *labelhost;
-		QLabel *labelport;
+	#include <QThread>
 
-		QLineEdit *linemsg;
-		QLineEdit *linehost;
+	#include <QDir>
 
-		QTextEdit *linechat;
+	#include "thread.h"
 
-		QWidget *winLogin;
+	class WinMsg : public QWidget
+	{
+		Q_OBJECT
 
-		QUdpSocket *socket;
-		QUdpSocket *server;
+			public:
+				explicit WinMsg(QWidget*, QString);
+				~WinMsg();
 
-		QString *login;
-};
+			private slots:
+				void clickButExit();
+				void clickButSend();
+				void clickButSendFile();
+				void recive();
+    //void changePathSlot(unsigned char);
+    		void endReceiveFileSlot();
+
+			private:
+				QBoxLayout *layout;
+
+				QPushButton *butsend;
+				QPushButton *butsendfile;
+				QPushButton *butexit;
+
+				QLabel *labellogin;
+				QLabel *labelhost;
+				QLabel *labelport;
+
+				QLineEdit *linemsg;
+				QLineEdit *linehost;
+
+				QTextEdit *linechat;
+
+				QWidget *winLogin;
+
+				QUdpSocket *socket;
+				QUdpSocket *server;
+
+				QString *login;
+				QString *path;
+   			QString filenameclass;
+
+				QFile *file;
+
+				bool receivefile;
+
+    		unsigned char mode;
+
+    		QTimer *timer;
+
+    		unsigned char choosedir;
+
+    		QByteArray arr;
+
+    		unsigned long sizefile;
+    		unsigned long receivebytes;
+
+    		QThread *thread;
+
+    		Thread *thread2;
+
+    	signals:
+        //void changePathSignal(unsigned char);
+				void endReceiveFileSignal();
+				void startReceiveFileSignal();
+	};
 
 #endif
