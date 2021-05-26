@@ -50,8 +50,6 @@ WinRecMsg::~WinRecMsg()
 		server = nullptr;
 	}
 
-	}
-
 	if(socket)
 	{
 		delete socket;
