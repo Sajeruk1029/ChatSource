@@ -498,9 +498,16 @@ moc_thread.o: moc_thread.cpp
 
 ####### Install
 
-install:  FORCE
+install:
+	install ./Chat /usr/local/bin/;
+	touch /usr/share/applications/Chat.desktop;
+	echo "[Desktop Entry]\nVersion=1.0\nName=Chat\nComment=Chat app\nType=Application\nExec=Chat .Chat/\nIcon=\nCategories=Utility\n" > /usr/share/applications/Chat.desktop
+	mysql -u root -e "create database chat;"
+	mysql -u root chat < MySQL/dump.sql
 
-uninstall:  FORCE
+uninstall:
+	rm -rf /usr/local/bin/Chat /usr/share/applications/Chat.desktop .Chat
+	mysql -u root -e "drop database chat;"
 
 FORCE:
 
